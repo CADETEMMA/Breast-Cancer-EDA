@@ -38,7 +38,7 @@ Modèle de Cox pour l'analyse des risques proportionnels
 
 Mode d'emploi pour exécuter le projet : 
 1) cloner le repostitory
-git clone https://github.com/ton-username/SEER-Breast-Cancer-EDA.git
+git clone https://github.com/CADETEMMA/Breast-Cancer-EDA.git
 
 2) installer les dépendances
 cd SEER-Breast-Cancer-EDA
