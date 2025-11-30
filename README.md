@@ -6,7 +6,6 @@ Ce projet se concentre sur l'analyse exploratoire des données (EDA) du dataset 
 Objectifs principaux :
 - Analyse exploratoire des données (EDA) pour comprendre la répartition et les caractéristiques des patients atteints de cancer du sein.
 - Analyse statistique pour identifier les corrélations entre les données démographiques (âge, sexe) et les résultats de survie.
-- Analyse de survie et visualisation des résultats des patients en fonction de diverses variables (par exemple, l'âge, le stade du cancer).
 - Identifier les facteurs déterminants qui influencent la survie des patients atteints de cancer du sein.
 
 Dataset : 
