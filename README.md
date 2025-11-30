@@ -32,9 +32,6 @@ Corrélation entre les variables numériques
 Test de Chi² pour les variables catégorielles
 Test t pour comparer l'âge en fonction du sexe
 
-Analyse de survie :
-Courbes de survie de Kaplan-Meier
-Modèle de Cox pour l'analyse des risques proportionnels
 
 Mode d'emploi pour exécuter le projet : 
 1) cloner le repostitory
@@ -54,7 +51,6 @@ numpy - Pour les opérations numériques
 matplotlib - Pour les graphiques et visualisations
 seaborn - Pour la visualisation statistique des données
 scipy - Pour les tests statistiques (Chi², t-tests)
-lifelines - Pour l'analyse de survie (Kaplan-Meier, modèle de Cox)
 ydata_profiling - Pour générer des rapports interactifs 
 
 Principaux résultats et conclusions :
