@@ -1,61 +1,133 @@
 # Breast-Cancer-EDA
 
 Présentation du projet : 
-Ce projet se concentre sur l'analyse exploratoire des données (EDA) du dataset SEER Breast Cancer. L'objectif est d'analyser les données démographiques des patients, les types de cancer, les taux de survie, et les résultats des traitements. Le projet utilise des méthodes statistiques et des visualisations des données à partir du dataset, dans le but de fournir des conclusions utiles aux professionnels de santé et aux chercheurs en cancérologie
+Ce projet porte sur l’analyse exploratoire du dataset SEER Breast Cancer.
+L’objectif est de comprendre les caractéristiques démographiques et cliniques des patientes, d’étudier leurs survies, et d’identifier les facteurs influençant le pronostic.
 
-Objectifs principaux :
-- Analyse exploratoire des données (EDA) pour comprendre la répartition et les caractéristiques des patients atteints de cancer du sein.
-- Analyse statistique pour identifier les corrélations entre les données démographiques (âge, sexe) et les résultats de survie.
-- Identifier les facteurs déterminants qui influencent la survie des patients atteints de cancer du sein.
+L’étude comprend :
+une EDA complète,
+des tests statistiques univariés,
+une analyse de survie (Kaplan-Meier),
+un modèle de Cox multivarié.
+
+Ce projet s’inscrit dans une démarche d’aide à la compréhension des facteurs pronostiques utilisés en cancérologie.
+
+Objectifs principaux : 
+Décrire les patientes atteintes de cancer du sein (âge, race, statut marital…).
+Analyser les caractéristiques tumorales (stades T/N, grade, récepteurs hormonaux).
+Étudier les facteurs influençant la survie globale.
+Identifier les facteurs pronostiques indépendants via un modèle de Cox.
 
 Dataset : 
 Source : SEER (Surveillance, Epidemiology, and End Results) du National Cancer Institute (NCI)
-Description du dataset : Ce dataset contient des informations sur les cas de cancer du sein avec plusieurs attributs, tels que :
+Ce dataset contient des informations sur :
 Données démographiques des patients (âge, sexe, origine ethnique, statut marital)
 Informations sur le cancer (stade du cancer, type de cancer, année du diagnostic)
 Données de survie (taux de survie, durée jusqu'au décès)
 
 Méthodes utilisées : 
-
-Nettoyage des données :
-Traitement des données manquantes (imputation avec la médiane ou le mode)
-Suppression des colonnes inutiles
+Nettoyage des données:
+Gestion des valeurs manquantes (imputation médiane ou mode)
 Suppression des doublons
+Standardisation / nettoyage des colonnes catégorielles
 
-Analyse exploratoire des données (EDA) :
-Statistiques descriptives (moyenne, médiane, écart-type)
-Visualisations des données (histogrammes, boxplots, diagrammes de dispersion)
+Analyse exploratoire:
+Statistiques descriptives
+Visualisations : histogrammes, boxplots, heatmaps, nuages de points
 
-Analyse statistique :
-Corrélation entre les variables numériques
-Test de Chi² pour les variables catégorielles
-Test t pour comparer l'âge en fonction du sexe
+Analyse statistique:
+Corrélations entre variables numériques
+Tests du Chi² pour variables catégorielles
+Tests t pour comparer les moyennes
+ANOVA pour comparer la survie selon plusieurs groupes
 
+Analyse de survie:
+Courbes Kaplan-Meier
+Tests log-rank
+Modèle Cox proportional hazards
 
-Mode d'emploi pour exécuter le projet : 
-1) cloner le repostitory
-git clone https://github.com/CADETEMMA/Breast-Cancer-EDA.git
-
-2) installer les dépendances
-cd SEER-Breast-Cancer-EDA
-pip install -r requirements.txt
-
-3) executer le code
-jupyter notebook notebooks/SEER_Breast_Cancer_EDA.ipynb
-
-
-Le projet nécessite les librairies Python suivantes :
-pandas - Pour la manipulation et l'analyse des données
-numpy - Pour les opérations numériques
-matplotlib - Pour les graphiques et visualisations
-seaborn - Pour la visualisation statistique des données
-scipy - Pour les tests statistiques (Chi², t-tests)
-ydata_profiling - Pour générer des rapports interactifs 
+Librairies utilisées :
+pandas – Manipulation de données
+numpy – Calcul numérique
+matplotlib – Visualisation
+seaborn – Graphiques statistiques
+scipy – Tests statistiques
+lifelines – Analyse de survie (Kaplan-Meier, Cox) 
 
 Principaux résultats et conclusions :
-L'âge moyen des patients est d'environ 54 ans.
-La taille moyenne des tumeurs est de 30.5 mm (3 cm), avec une variation assez large (écart-type de 21.12).
-En moyenne, 14 ganglions lymphatiques ont été examinés par patient, avec un écart-type de 8.1
-En moyenne, 4.16 ganglions lymphatiques sont positifs pour les cellules cancéreuses, avec un écart-type de 5.11.
-La durée de survie moyenne des patients est de 71.3 mois (environ 5 ans et 11 mois). L’écart-type de 22.92 mois montre qu'il existe une variation importante dans les durées de survie des patients.
+1. Statistiques descriptives
+Âge moyen : 54 ans
+Taille tumorale moyenne : 30.5 mm
+Ganglions examinés : 14 en moyenne
+Ganglions positifs : 4.16 en moyenne
+Survie moyenne : 71.3 mois (~6 ans)
+
+Ces valeurs confirment la grande variabilité des situations cliniques.
+
+2. Tests du Chi² : relations entre variables catégorielles
+De nombreuses associations significatives (p < 0.05) ont été observées :
+
+Associations majeures :
+Race VS Grade, ER status, PR status, Survie
+Statut marital VS Stades N / 6th stage / survie
+Stades T, N, Grade, A stage VS survie
+
+Statuts hormonaux fortement associés entre eux et au statut de survie
+
+=> Ces interdépendances justifient l'utilisation d'un modèle multivarié comme le modèle de Cox.
+
+3. Tests t
+ER+ → survie significativement meilleure (p < 0.0001)
+PR+ → survie significativement meilleure (p < 0.0001)
+
+4. ANOVA : survie selon les stades
+Toutes les ANOVA sont significatives :
+N Stage -> p-value = 	0.0000	survie diminue fortement avec N2/N3
+T Stage	p-value = 0.0000	T3/T4 = survie nettement réduite
+Grade	p-value = 0.0001	Grade élevé = mauvais pronostic
+
+5. Courbes Kaplan-Meier
+Statut hormonal
+ER+ / PR+ = meilleure survie
+
+Stades tumoraux
+T1 > T2 > T3 > T4
+N0 > N1 > N2 > N3
+Grade I > Grade II > Grade III > Grade IV
+
+6. Modèle de Cox : facteurs indépendants de survie
+
+Le modèle ajusté met en évidence des facteurs pronostiques indépendants, même après correction pour les autres variables.
+
+Facteurs augmentant le risque (HR > 1) : 
+N3 : HR = 3.22 (effet très fort)
+N2 : HR = 1.82
+T4 : HR = 2.22
+Grade III : HR = 1.42
+Grade IV : HR = 3.17
+Âge : HR = 1.02 par année
+
+Facteurs protecteurs (HR < 1) : 
+Estrogen+ : HR = 0.52
+Progesterone+ : HR = 0.61
+Grade I : HR = 0.65
+
+Performance du modèle : 
+Concordance = 0.73 → bonne capacité prédictive
+Log-likelihood ratio p < 0.0001
+
+=> Le modèle est robuste et confirme les résultats univariés et Kaplan-Meier.
+
+Conclusion générale
+Cette analyse permet de mettre en évidence les facteurs les plus importants pour le pronostic des patientes atteintes d’un cancer du sein.
+Les variables liées au stade tumoral (T, N, Grade) et les statuts hormonaux (ER/PR) jouent un rôle majeur dans la survie.
+
+Le modèle de Cox a identifié des facteurs pronostiques indépendants, notamment :
+âge
+stades T4, N2, N3
+grade tumoral
+statut ER et PR positif (protecteurs)
+
+Ces résultats sont cohérents avec la littérature clinique et montrent la pertinence des données SEER dans l’étude du cancer du sein.
+Le modèle Cox montre une bonne capacité prédictive (concordance = 0.73) et confirme les résultats obtenus par Kaplan-Meier et les tests univariés.
 
